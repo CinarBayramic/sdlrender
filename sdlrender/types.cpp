@@ -6,6 +6,9 @@
 #include <array>
 namespace cgl {
 
+	double clamp(double value, double min, double max) {
+		return (value < min) ? min : (value > max) ? max : value;
+	}
 	/*class vec4 {
 	public:
 		double x, y, z,w;
@@ -61,8 +64,8 @@ namespace cgl {
 		p[2] = v3;
 	}
 
-	void poly2::p2scr(SDL_Renderer* r, SDL_Texture* texture) {
-		rTT(r, texture,poly2(p[0], p[1], p[2]), poly2(p[0], p[1], p[2]));
+	void poly2::p2scr(SDL_Renderer* r, poly2 uv, SDL_Texture* texture) {
+		rTT(r, texture,poly2(p[0], p[1], p[2]), /*poly2(p[0], p[1], p[2])*/uv);
 	}
 
 	void poly2::p2scr(SDL_Renderer* r) {
@@ -157,9 +160,10 @@ namespace cgl {
 			projected[i].p[2] = cgl::multvecby(cgl::perspectiveProject(offsetpoly(MESH[i], pos, rot).p[2], 90.0, 16 / 9, 0.1, 100.0), m);
 			
 		}
+		poly2 uv = poly2(cgl::vec2(128,0), cgl::vec2(0, 0), cgl::vec2(0, 128));
 		for (int i = 0; i < num_polys; i++) {
-			projected[i].p2scr(renderer,t);
-			//projected[i].p2scr(renderer);
+			projected[i].p2scr(renderer,uv,t);
+			projected[i].p2scr(renderer);//cool outlines?
 			//rTT(renderer,t,projected[i],projected[i]);
 		}
 		free(projected);
@@ -178,11 +182,13 @@ namespace cgl {
 		SDL_Vertex sdlVertices[3];
 
 		for (int i = 0; i < 3; ++i) {
+			//DEBUGGGGGGGG std::cout << "\n";
+			//std::cout << p.p[i].x << "SPACE";
 			sdlVertices[i] = {
-				{ (float)p.p[i].x, (float)p.p[i].y},
-				{ 255, 255, 255, 255 },
-				{ (float)uv.p[i].x, (float)uv.p[i].y}
-			};
+	{ (float)p.p[i].x, (float)p.p[i].y },
+	{ 255, 255, 255, 255 },
+	{ (float)clamp(uv.p[i].x, 0.0f, 1.0f), (float)clamp(uv.p[i].y, 0.0f, 1.0f) }
+			};// std::cout << sdlVertices[i].position.y;
 		}
 
 		// Render the triangle

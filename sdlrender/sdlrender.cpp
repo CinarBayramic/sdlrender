@@ -70,7 +70,7 @@ void renderthings(SDL_Renderer* renderer) {
     obj.setmesh(MESH,sizeof(MESH));
     //std::cout << sizeof(obj.MESH) << "\n";
    // obj.setmesh(MESH);
-    
+
     obbjj.OBJTOSCR(renderer, sizeof(MESH), t, 24.95 * scrolled);
     objj.OBJTOSCR(renderer, sizeof(MESH), t, 50 * scrolled);
     obj.OBJTOSCR(renderer, sizeof(MESH), t, 100 * scrolled);
@@ -109,10 +109,10 @@ int main(int argc, char* argv[])
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);//my screen doesnt have that big of a res i think
     SDL_Init(SDL_INIT_EVERYTHING);
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
-    t = SDL_CreateTexture(
-        renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, 128, 128
-    );
-   // t = loadTexture("C:\\Users\\lenovo\\Desktop\\sides.png",renderer);
+    //t = SDL_CreateTexture(
+    //    renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, 128, 128
+    //);
+    t = loadTexture("sides.png",renderer);
     SDL_Event e;
     while (SDL_PollEvent(&e) != SDL_QUIT) {
         if(e.type == SDL_MOUSEMOTION) 

@@ -6,6 +6,7 @@
 #include <SDL_image.h>
 
 namespace cgl {
+	double clamp(double value, double min, double max);
 	/*class vec4 {
 	public:
 		double x, y, z, w;
@@ -37,7 +38,7 @@ namespace cgl {
 		poly2();
 		poly2(const vec2& v1, const vec2& v2, const vec2& v3);
 		void p2scr(SDL_Renderer* r);
-		void p2scr(SDL_Renderer* r, SDL_Texture* texture);
+		void p2scr(SDL_Renderer* r, poly2 uv, SDL_Texture* texture);
 
 
 	};
