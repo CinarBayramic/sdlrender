@@ -112,7 +112,7 @@ int main(int argc, char* argv[])
     //t = SDL_CreateTexture(
     //    renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, 128, 128
     //);
-    t = loadTexture("sides.png",renderer);
+    t = loadTexture(argv[0]+"\\sides.png",renderer);
     SDL_Event e;
     while (SDL_PollEvent(&e) != SDL_QUIT) {
         if(e.type == SDL_MOUSEMOTION) 
